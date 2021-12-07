@@ -19,8 +19,27 @@
 html,body,#root,.App,.height-full{
   height:100%
 }
-.chart-container{
+.app-chart{
   width: 80%;
     margin: 20px auto 0 auto;
   
+}
+.btn.btn-outline-primary{
+  color: #9c50e5;
+  border-color: #9c50e5;
+}
+.btn.btn-outline-primary:hover ,.btn.btn-outline-primary:active ,.btn.btn-outline-primary:focus{
+  background-color:#9c50e5;
+  border-color:#9c50e5;
+}
+.app-DimensionMeasures{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 77%;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+.app-DimensionMeasures span {
+  width: 20%;
 }

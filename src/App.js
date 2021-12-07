@@ -4,7 +4,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import ChartComp from '../src/components/chart/Chart'
+import ChartComp from '../src/components/chart/Chart';
+import DimensionMeasures from '../src/components/dimensionMeasures/DimensionMeasures';
 
 function App() {
   return (
@@ -16,7 +17,15 @@ function App() {
           </Col>
           <Col className="no-padding justify-content-center" xs={12} md={9}>
             <h1 className="plotter-head">Plotter</h1>
-            <div className="chart-container">
+            <div className="app-DimensionMeasures">
+              <span>Dimensions</span>
+              <DimensionMeasures />
+            </div>
+            <div className="app-DimensionMeasures">
+              <span>Measures</span>
+              <DimensionMeasures />
+            </div>
+            <div className="app-chart">
               <ChartComp />
             </div>
           </Col>

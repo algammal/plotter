@@ -1,0 +1,10 @@
+.dimensionMeasures-draggableArea{
+    width: 100%;
+    background-color: #f2f2f2;
+    height: 50px;
+    display: flex;
+    justify-content: end;
+}
+.dimensionMeasures-container{
+    width: 100%;
+}
