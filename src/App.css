@@ -43,3 +43,13 @@ html,body,#root,.App,.height-full{
 .app-DimensionMeasures span {
   width: 20%;
 }
+@media screen and (max-width: 767px) {
+  .app-chart {
+    width: 90%;
+    height: 500px;
+}
+.app-DimensionMeasures{
+  width: 90%;
+  font-size: 9px;
+}
+}

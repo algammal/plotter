@@ -1,0 +1,1 @@
+export const RECEIVE_COLUMNS = 'RECEIVE_COLUMNS'
