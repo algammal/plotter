@@ -13,6 +13,7 @@ import initialData from "../src/Initialstates"
 class App extends Component {
 
   state = initialData
+
   componentDidMount() {
     const apiCalling = async (api) => {
       var myHeaders = new Headers();
@@ -53,6 +54,20 @@ class App extends Component {
 
     }
     apiCalling('https://plotter-task.herokuapp.com/columns')
+  }
+  handelClear = (e) => {
+    e.preventDefault();
+    let array = []
+    Object.keys(this.state.tasks).forEach(element => {
+      array.push(element)
+    })
+    this.state.columns['column_1'].taskIds = array
+    this.state.columns['column_2'].taskIds = []
+    this.state.columns['column_3'].taskIds = []
+    this.setState({
+      ...this.state,
+    })
+
   }
   onDragEnd = result => {
     const { destination, source, draggableId } = result
@@ -115,6 +130,7 @@ class App extends Component {
     }
     this.setState(newState)
   }
+
   render() {
     return (
       <div className="App">
@@ -155,14 +171,14 @@ class App extends Component {
                       taskId => this.state.tasks[taskId]
                     )
                     return (
-                      <div className="app-DimensionMeasures">
+                      <div key={idx} className="app-DimensionMeasures">
                         <span>{idx === 1 ? 'Dimension' : 'Measures'}</span>
                         <div className="dimensionMeasures-container">
                           <div className="dimensionMeasures-mainAcontainer">
                             <div className="dimensionMeasures-draggableArea">
                               <Column key={column.id} column={column} className="app-Coulmn" tasks={tasks} />
                             </div>
-                            <Button className="dimensionMeasures-button" variant="outline-primary">Clear</Button>
+                            <Button onClick={this.handelClear} className="dimensionMeasures-button" variant="outline-primary">Clear</Button>
                           </div>
                         </div>
                       </div>

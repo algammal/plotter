@@ -6,7 +6,7 @@ import Task from '../task/Task'
 
 function Column(props) {
     return (
-        <div ClassName="coulmnComponent">
+        <div className="coulmnComponent">
             <Droppable className="droppable" droppableId={props.column.id} type="TASK">
                 {(provided, snapshot) => (
                     <div className="droppable-child" ref={provided.innerRef}
