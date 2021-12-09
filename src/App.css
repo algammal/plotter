@@ -38,10 +38,25 @@ html,body,#root,.App,.height-full{
   justify-content: center;
   width: 77%;
   margin: 0 auto;
-  margin-bottom: 20px;
+  margin-bottom: 33px;
 }
 .app-DimensionMeasures span {
   width: 20%;
+}
+.dimensionMeasures-mainAcontainer{
+  display: flex;
+}
+.dimensionMeasures-draggableArea div{
+  height: 100%;
+}
+.dimensionMeasures-draggableArea{
+  width: 100%;
+  background-color: #f2f2f2;
+  height: 50px;
+  justify-content: flex-end;
+}
+.dimensionMeasures-container{
+  width: 100%;
 }
 @media screen and (max-width: 767px) {
   .app-chart {

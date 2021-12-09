@@ -19,13 +19,15 @@
     align-items: center;
     margin-top: 40px;
 }
-.coulmn{
-    color: #2b2b38;
-    background-color: #f2f2f2;
-    border-radius: 15px;
-    width: 30%;
-    margin-bottom: 10px;
-    text-align: center;
+.coulmns-items .coulmns-container{
+    min-width: 100px;
+}
+.coulmnComponent{
+    height: 100%;
+    display: flex;
+}
+.dimensionMeasures-draggableArea .droppable-child{
+    display:flex;
 }
 @media screen and (max-width: 767px) {
     .coulmns-items {
