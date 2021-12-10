@@ -40,7 +40,7 @@ class App extends Component {
               })
             })
             let array = []
-            Object.keys(this.state.tasks).forEach(element => {
+            Object.values(this.state.tasks).forEach(element => {
               array.push(element)
             })
             this.state.columns['column_1'].taskIds = array
@@ -104,14 +104,22 @@ class App extends Component {
     ) {
       return
     }
-
     const start = this.state.columns[source.droppableId]
     const finish = this.state.columns[destination.droppableId]
+    if (destination.droppableId === 'column_2' && finish.taskIds.length === 1) {
+      return
+    }
 
+    if (destination.droppableId === 'column_2' && JSON.parse(draggableId).function !== 'dimension') {
+      return
+    }
+    if (destination.droppableId === 'column_3' && JSON.parse(draggableId).function !== "measure") {
+      return
+    }
     if (start === finish) {
       const newTaskIds = Array.from(start.taskIds)
       newTaskIds.splice(source.index, 1)
-      newTaskIds.splice(destination.index, 0, draggableId)
+      newTaskIds.splice(destination.index, 0, JSON.parse(draggableId))
       const newColumn = {
         ...start,
         taskIds: newTaskIds
@@ -124,7 +132,6 @@ class App extends Component {
           [newColumn.id]: newColumn
         }
       }
-
       this.setState(newState)
       return
     }
@@ -136,7 +143,7 @@ class App extends Component {
     }
 
     const finishTaskIds = Array.from(finish.taskIds)
-    finishTaskIds.splice(destination.index, 0, draggableId)
+    finishTaskIds.splice(destination.index, 0, JSON.parse(draggableId))
     const newFinish = {
       ...finish,
       taskIds: finishTaskIds
@@ -171,11 +178,8 @@ class App extends Component {
                       {this.state.columnOrder.map((columnId, idx) => {
                         if (idx === 0) {
                           const column = this.state.columns[columnId]
-                          const tasks = column?.taskIds?.map(
-                            taskId => this.state.tasks[taskId]
-                          )
                           return (
-                            <Column key={column.id} column={column} className="app-Coulmn" tasks={tasks} />
+                            <Column key={column.id} column={column} className="app-Coulmn" tasks={column.taskIds} />
                           )
                         } return null
                       })}
@@ -189,16 +193,13 @@ class App extends Component {
                 {this.state.columnOrder.map((columnId, idx) => {
                   if (idx > 0) {
                     const column = this.state.columns[columnId]
-                    const tasks = column?.taskIds?.map(
-                      taskId => this.state.tasks[taskId]
-                    )
                     return (
                       <div key={idx} className="app-DimensionMeasures">
                         <span>{idx === 1 ? 'Dimension' : 'Measures'}</span>
                         <div className="dimensionMeasures-container">
                           <div className="dimensionMeasures-mainAcontainer">
                             <div className="dimensionMeasures-draggableArea">
-                              <Column key={column.id} column={column} className="app-Coulmn" tasks={tasks} />
+                              <Column key={column.id} column={column} className="app-Coulmn" tasks={column.taskIds} />
                             </div>
                             <Button id={idx} onClick={this.handelClear} className="dimensionMeasures-button" variant="outline-primary">Clear</Button>
                           </div>
@@ -209,7 +210,7 @@ class App extends Component {
                 })}
 
                 <div className="app-chart">
-                  <ChartComp />
+                  <ChartComp dimension={this.state.columns['column_2'].taskIds} measures={this.state.columns['column_3'].taskIds} />
                 </div>
               </Col>
             </DragDropContext>

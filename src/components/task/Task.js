@@ -5,10 +5,11 @@ import "../task/task.css"
 
 
 export default function Task(props) {
-
+    console.log(props)
     return (
-        <Draggable
-            draggableId={props.task?.name?.replace(' ', '_')}
+
+        < Draggable
+            draggableId={JSON.stringify(props.task)}
             index={props.index}
         >
             {(provided, snapshot) => (
@@ -20,9 +21,13 @@ export default function Task(props) {
                 >
                     <div className="task">
                         {props?.task?.name}
+                        <div className='functionDimension'>
+                            {props?.task?.function}
+                        </div>
                     </div>
                 </div>
-            )}
-        </Draggable>
+            )
+            }
+        </Draggable >
     )
 }
