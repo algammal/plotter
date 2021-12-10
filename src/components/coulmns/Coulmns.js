@@ -14,7 +14,7 @@ function Column(props) {
                         isdraggingover={snapshot.isDraggingOver.toString()}>
                         {
                             props.tasks.map((task, index) => (
-                                <Task key={task.name.replace(' ', '_')} task={task} index={index} />
+                                <Task key={task?.name?.replace(' ', '_')} task={task} index={index} />
                             ))}
                         {provided.placeholder}
                     </div>

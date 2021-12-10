@@ -61,13 +61,35 @@ class App extends Component {
     Object.keys(this.state.tasks).forEach(element => {
       array.push(element)
     })
-    this.state.columns['column_1'].taskIds = array
-    this.state.columns['column_2'].taskIds = []
-    this.state.columns['column_3'].taskIds = []
-    this.setState({
-      ...this.state,
-    })
+    if (e.target.id === "1") {
+      let tempstate = JSON.parse(JSON.stringify(this.state));
+      let col2inputs = [];
+      let col1inputs = [];
+      tempstate.columns['column_1'].taskIds.forEach((item) => {
+        col1inputs.push(item)
+      })
+      tempstate.columns['column_2'].taskIds.forEach((item) => {
+        col1inputs.push(item)
+      })
+      tempstate.columns['column_1'].taskIds = col1inputs
+      tempstate.columns['column_2'].taskIds = col2inputs;
 
+      this.setState(tempstate)
+    } else if (e.target.id === "2") {
+      let tempstate = JSON.parse(JSON.stringify(this.state));
+      let col3inputs = [];
+      let col1inputs = [];
+      tempstate.columns['column_1'].taskIds.forEach((item) => {
+        col1inputs.push(item)
+      })
+      tempstate.columns['column_3'].taskIds.forEach((item) => {
+        col1inputs.push(item)
+      })
+      tempstate.columns['column_1'].taskIds = col1inputs
+      tempstate.columns['column_3'].taskIds = col3inputs;
+
+      this.setState(tempstate)
+    }
   }
   onDragEnd = result => {
     const { destination, source, draggableId } = result
@@ -149,7 +171,7 @@ class App extends Component {
                       {this.state.columnOrder.map((columnId, idx) => {
                         if (idx === 0) {
                           const column = this.state.columns[columnId]
-                          const tasks = column.taskIds.map(
+                          const tasks = column?.taskIds?.map(
                             taskId => this.state.tasks[taskId]
                           )
                           return (
@@ -167,7 +189,7 @@ class App extends Component {
                 {this.state.columnOrder.map((columnId, idx) => {
                   if (idx > 0) {
                     const column = this.state.columns[columnId]
-                    const tasks = column.taskIds.map(
+                    const tasks = column?.taskIds?.map(
                       taskId => this.state.tasks[taskId]
                     )
                     return (
@@ -178,7 +200,7 @@ class App extends Component {
                             <div className="dimensionMeasures-draggableArea">
                               <Column key={column.id} column={column} className="app-Coulmn" tasks={tasks} />
                             </div>
-                            <Button onClick={this.handelClear} className="dimensionMeasures-button" variant="outline-primary">Clear</Button>
+                            <Button id={idx} onClick={this.handelClear} className="dimensionMeasures-button" variant="outline-primary">Clear</Button>
                           </div>
                         </div>
                       </div>

@@ -8,7 +8,7 @@ export default function Task(props) {
 
     return (
         <Draggable
-            draggableId={props.task.name.replace(' ', '_')}
+            draggableId={props.task?.name?.replace(' ', '_')}
             index={props.index}
         >
             {(provided, snapshot) => (
@@ -19,7 +19,7 @@ export default function Task(props) {
                     isdragging={snapshot.isDragging.toString()}
                 >
                     <div className="task">
-                        {props.task.name}
+                        {props?.task?.name}
                     </div>
                 </div>
             )}
